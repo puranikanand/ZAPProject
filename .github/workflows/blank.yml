@@ -1,0 +1,42 @@
+# This is a basic workflow to help you get started with Actions
+
+name: OWASP ZAP Scan
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: 
+      -main # trigger ZAP scan on PRs targetting the 'main' branch
+  pull_request:
+    branches: 
+      -main
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  zap_scan:
+    runs-on: ubuntu-latest
+    steps:
+      # Check out the repository
+      -name: Checkout Repository
+      users: actions/checkout@v2
+
+      # setup python
+      -name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+        
+      # Run ZAP Scan
+      -name: ZAP Scan
+      uses: zaproxy/action-baseline@v0.14.0
+      with:
+        target: 'https://www.medium.com'
+        token: ${{secrets.GITHUB_TOKEN}}
+
