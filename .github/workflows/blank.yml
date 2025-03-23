@@ -24,19 +24,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Check out the repository
-      -name: Checkout Repository
-      users: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
       # setup python
-      -name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.8'
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
         
       # Run ZAP Scan
-      -name: ZAP Scan
-      uses: zaproxy/action-baseline@v0.14.0
-      with:
-        target: 'https://www.medium.com'
-        token: ${{secrets.GITHUB_TOKEN}}
+      - name: ZAP Scan
+        uses: zaproxy/action-baseline@v0.14.0
+        with:
+          target: 'https://www.medium.com'
+          token: ${{secrets.GITHUB_TOKEN}}
 
