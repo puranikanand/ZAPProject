@@ -37,6 +37,6 @@ jobs:
       - name: ZAP Scan
         uses: zaproxy/action-baseline@v0.14.0
         with:
-          target: 'https://customer.sudlife.in'
+          target: 'https://partner.sudlife.in'
           token: ${{secrets.GITHUB_TOKEN}}
 
